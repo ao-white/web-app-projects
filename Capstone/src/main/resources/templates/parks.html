@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Parks : Wardens of the Woods</title>
+        <style>
+			.info {
+				background-color: #333333;
+				color: #FFFFFF;
+				margin-top: 10px;
+				border: thick solid #fff;
+				text-align: center;
+			}
+			.formParks {
+				margin-bottom: 10px;
+				text-align: center;
+                                display: inline-block;
+                                width: 27%;
+			}
+			.park-description {
+				text-align: left;
+			}
+			.card {
+				width: 100%;
+				color: #000;
+				padding: 5px;
+				margin-bottom: 5px;
+			}
+			.park-details {
+				overflow-y: auto;
+			}
+                        .selectMessage {
+				background-color: #333333;
+				color: #fff;
+				padding: 5px;
+				margin-bottom: 5px;
+				width: 50%;
+				border: thick solid #fff;
+				border-radius: 25px;
+				margin: auto;
+			}
+			.image {
+				border: thin solid #fff;
+                                max-width: 45vh;
+				max-height: 35vh;
+			}
+                        .carousel-indicators li{display:none;}
+        </style>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+		<link href="styles/parkStyles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+		<header style="display: inline-block; width:100%; height:100%">
+			<h1>Wardens of the Woods</h1>
+		</header>
+		<div class="nav-bar" style="text-align: center;">
+			<ul>
+				<li><a class="nav-link" href="/">Home</a></li>
+				<li><a class="nav-link active" href="/parks">Parks</a></li>
+				<li><a class="nav-link" href="/news">News</a></li>
+				<li><a class="nav-link" href="/journal">Journal</a></li>
+				<li sec:authorize="!isAuthenticated()">
+					<a class="nav-link" id="signIn" href="/login">Sign In</a>
+				</li>
+				<li sec:authorize="isAuthenticated()"  style="height:42px">
+					<form class="form-inline" 
+						  method="POST" 
+						  action="/logout">
+						<input type="hidden" 
+								th:name="${_csrf.parameterName}" 
+								th:value="${_csrf.token}"/>
+						<button class="btn btn-link nav-link" 
+							  id="submit" 
+							  type="submit" style="color: #ffffff"> Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<div class="container">
+			<div class="formDiv" style="text-align:center">
+				<form class="formParks">
+					<select class="form-control search" id="parkOptions">
+						<option selected disabled>Filter by Park</option>
+						<option th:each="park : ${parks}"
+								th:text="${park.name}"
+								th:value="${park.parkId}">
+						</option>
+					</select>
+				</form>
+                                <div class="selectMessage">
+					<h2>Select a Park to view its profile!</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4" style="height: 700px">
+					<div class="info park-picture" style="height: 40%; display: block; overflow: hidden;">
+						<h4 id="parkName">Park Name</h4>
+						<div class="central">
+							<div id="carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+								<ol class="carousel-indicators">
+									<li data-target="#carousel" data-slide-to="0"></li>
+									<li data-target="#carousel" data-slide-to="1"></li>
+									<li data-target="#carousel" data-slide-to="2"></li>
+								</ol>
+								<div class="carousel-inner">
+								</div>
+							</div>	
+						</div>
+					</div>
+					<div class="info park-details" style="height: 55%">
+						<div>
+							<h4 class="prices">Prices</h4>
+                                                        <div class="priceItems">
+								
+                                                        </div>
+						</div>
+						<div>
+							<h4 class="alerts">Alerts</h4>
+							<div class="alertItems">
+								
+                                                        </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8" style="height: 700px">
+					<div class="info park-description" style="min-height: 45%; display: block; overflow: auto;">
+						<h4 style="text-align:center" id="description">Description</h4>
+                                                <div class="descriptionHere">
+                                                    
+                                                </div>
+					</div>
+					<div class="info park-other" style="height: auto; min-height: 330px; display: block;">
+						<h4>Learn More!</h4>
+						<div class="row article" style="display: flex; flex-wrap: wrap;">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="scripts/jquery-2.2.4.js"></script>
+		<script src="scripts/bootstrap.js"></script>
+		<script src="scripts/parks.js"></script>
+   </body>
+</html>

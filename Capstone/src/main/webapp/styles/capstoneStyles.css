@@ -1,0 +1,156 @@
+/*
+	Alex White
+	02-05-2020
+	Revision -
+*/
+
+body {
+	background: url(../images/forest2.jpg);
+	background-size: cover;
+	-moz-background-size: cover;
+	background-repeat:no-repeat;
+	background-color: #333333;
+	background-attachment: fixed;
+}
+
+footer, ul{
+	color: #FFFFFF;
+	margin-bottom:0;
+}
+
+.carousel {
+	max-height: 47vh;
+	margin: 0 auto;
+	border: thick solid #fff;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.carousel-item img{
+	max-height: 46vh;
+	width: 100%;
+}
+
+.carousel-caption {
+	background-color: #333333;
+	height: 15%;
+	vertical-align: text-top;
+	padding: 0;
+}
+
+.carousel-caption h5, header h1 {
+	text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 2px #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+}
+
+.carousel-caption h5 {
+	margin-top: 2px;
+	margin-bottom: 0;
+	font-size: 1.5vw;
+}
+
+ .carousel-caption p{
+	text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; 
+	font-size: 1vw;
+ }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+  text-align: center;
+  display: inline-block;
+}
+
+.nav-bar {
+	width: 100%;
+	background-color: #333333;
+	margin: 0;
+	padding: 0;
+	height: 42px;
+	margin-bottom: 10px;
+	border-bottom: thick solid #333333;
+	border-bottom-width: 4px;
+}
+
+.nav-link {
+	width: 95px;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+}
+
+header {
+	background-image: url('../images/forest2.jpg');
+	background-size: cover;
+	padding: 10px;
+	color: #ffffff;
+	font-size: 3em;
+	text-align: center;
+	background-size: cover;
+	-moz-background-size: cover;
+	background-repeat:no-repeat;
+	background-color: #333333;
+	background-attachment: fixed;
+}
+
+a.active {
+  background-color: #4CAF50;
+  border-bottom: medium solid #4CAF50;
+}
+
+a.nav-link:link
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:visited
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:hover
+{
+   border: thin solid #fff;
+   text-decoration: none;
+}
+a.nav-link:active
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+
+button.nav-link:link
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+button.nav-link:visited
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+button.nav-link:hover
+{
+   border: thin solid #fff;
+   text-decoration: none;
+}
+button.nav-link:active
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+
+button.nav-link {
+    border-radius:0px;
+    color: #ffffff;
+}

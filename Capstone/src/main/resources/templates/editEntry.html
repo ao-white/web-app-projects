@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Journal : Wardens of the Woods</title>
+        <style>
+			.container {
+				text-align: center;
+			}
+			.formEntry {
+				background-color: #333333;
+				margin-top: 40px;
+				padding: 25px;
+				color: #fff;
+				border-radius: 25px;
+				width: 50%;
+				text-align: center;
+			}	
+			#submit-button, #cancel {
+				border: thick solid #fff;
+			}
+			#submit-button:hover, #cancel:hover {
+				border-color: #4CAF50;
+			}
+			#date {
+				margin-left: 10px;
+			}
+        </style>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+		<link href="styles/capstoneStyles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+		<header style="display: inline-block; width:100%; height:100%">
+			<h1>Wardens of the Woods</h1>
+		</header>
+		<div class="nav-bar" style="text-align: center">
+			<ul>
+				<li><a class="nav-link" href="/">Home</a></li>
+				<li><a class="nav-link" href="/parks">Parks</a></li>
+				<li><a class="nav-link" href="/news">News</a></li>
+				<li><a class="nav-link active" href="/journal">Journal</a></li>
+				<li sec:authorize="!isAuthenticated()">
+					<a class="nav-link" id="signIn" href="/login">Sign In</a>
+				</li>
+				<li sec:authorize="isAuthenticated()"  style="height:42px">
+					<form class="form-inline" 
+						  method="POST" 
+						  action="/logout">
+						<input type="hidden" 
+								th:name="${_csrf.parameterName}" 
+								th:value="${_csrf.token}"/>
+						<button class="btn btn-link nav-link" 
+							  id="submit" 
+							  type="submit" style="color: #ffffff"> Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<div class="container">
+			<form class="formEntry" method="POST" th:action="@{editEntryPost(id=${editEntry.entryId})}" th:object="${editEntry}" style="display : inline-block">
+				<div class="form-group form-inline">
+					<label for="date" class="">Entry Date:</label>
+					<input type="date" th:field="*{entryDate}" class="form-control" name="date" id="date" th:value="${editEntry.entryDate}"/>
+				</div>
+                                <div th:if="${#fields.hasErrors('entryDate')}">
+                                        <p th:each="error : ${#fields.errors('entryDate')}" 
+                                            class="alert alert-danger row" th:text="${error}">Bad Date</p>
+                                </div>
+				<div class="form-group" style="text-align:left">
+					<label for="entry">Entry Text:</label>
+					<textarea rows="6" th:field="*{entry}" class="form-control" name="entry" id="entry" th:value="${editEntry.entry}"></textarea>
+				</div>
+                                <div th:if="${#fields.hasErrors('entry')}">
+                                        <p th:each="error : ${#fields.errors('entry')}" 
+                                            class="alert alert-danger row" th:text="${error}">Bad Date</p>
+                                </div>
+				<button type="submit" class="btn btn-primary" id="submit-button">Edit Entry</button>
+				<a href="/journal" class="btn btn-secondary" id="cancel">Cancel</a>
+			</form>
+		</div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

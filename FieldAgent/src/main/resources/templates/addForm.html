@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>Assignment: Field Agent</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <style>
+            img {
+                    width: 95%;
+            }
+
+            h2 {
+                    border-bottom: 1px solid #B5362D;
+            }
+
+            .container {
+                    padding-top: 15px;
+                    padding-bottom: 50px;
+            }
+
+            .right {
+                    text-align: right;
+            }
+
+            .margin-bottom {
+                    margin-bottom: 25px;
+            }
+
+            .wireframe {
+                    margin: 25px 0px;
+                    padding: 25px;
+                    border: 1px solid rgb(90, 89, 89);
+            }
+
+            .validation-summary {
+                    color: #dc3545;
+            }
+
+            #notes {
+                    height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wireframe">
+
+                <h3 class="margin-bottom">Add a Field Agent</h3>
+                <div class="validation-summary">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <form action="addAgent" method="POST" th:object="${agent}" class="form">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>First Name</label>
+                            <input th:field="*{firstName}" class="form-control">
+                            <div th:if="${#fields.hasErrors('firstName')}">
+                                <p th:each="error : ${#fields.errors('firstName')}" class="text-danger" 
+                                  th:text="${error}"> Bad first name</p>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Middle Name</label>
+                            <input th:field="*{middleName}" class="form-control">
+                        </div>
+                        <div class="form-group col">
+                            <label>Last Name</label>
+                            <input th:field="*{lastName}" class="form-control">
+                            <div th:if="${#fields.hasErrors('lastName')}">
+                                <p th:each="error : ${#fields.errors('lastName')}" class="text-danger" 
+                                  th:text="${error}"> Bad last name</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Birth Date</label>
+                            <input th:field="*{birthDate}" class="form-control" type="date" max="9999-12-31">
+                            <div th:if="${#fields.hasErrors('birthDate')}">
+                                <p th:each="error : ${#fields.errors('birthDate')}" class="text-danger" 
+                                  th:text="${error}"> Bad birth date</p>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Height</label>
+                            <input th:field="*{height}" class="form-control" type="number" >
+                            <div th:if="${#fields.hasErrors('height')}">
+                                <p th:each="error : ${#fields.errors('height')}" class="text-danger" 
+                                  th:text="${error}"> Bad height</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Agency</legend>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label>Identifier</label>
+                                <input th:field="*{identifier}" class="form-control">
+                                <div th:if="${#fields.hasErrors('identifier')}">
+                                    <p th:each="error : ${#fields.errors('identifier')}" class="text-danger" 
+                                      th:text="${error}"> Bad identifier</p>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Agency</label>
+                                <select th:field="*{agency}" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option value="1">CIA</option>
+                                    <option value="2">FBU</option>
+                                    <option value="3">NSA</option>
+                                    <option value="4">Homeland Security</option>
+                                    <option value="5">Defense Intelligence Agency</option>
+                                    <option value="6">Southern Reach</option>
+                                    <option value="7">CONTROL</option>
+                                    <option value="8">ODIN</option>
+                                    <option value="9">Special Forces</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('agency')}">
+                                    <p th:each="error : ${#fields.errors('agency')}" class="text-danger" 
+                                      th:text="${error}"> Bad agency</p>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Security Clearance</label>
+                                <select th:field="*{securityClearance}" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option value="1">Confidential</option>
+                                    <option value="2">Secret</option>
+                                    <option value="3">Top Secret</option>
+                                    <option value="4">Dark Matter</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('securityClearance')}">
+                                    <p th:each="error : ${#fields.errors('securityClearance')}" class="text-danger" 
+                                      th:text="${error}"> Bad security clearance</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col ">
+                                <label>Activation Date</label>
+                                <input th:field="*{activationDate}" class="form-control" type="date" max="9999-12-31">
+                                <div th:if="${#fields.hasErrors('activationDate')}">
+                                    <p th:each="error : ${#fields.errors('activationDate')}" class="text-danger" 
+                                      th:text="${error}"> Bad activation date</p>
+                                </div>
+                            </div>
+                            <div class="form-group col align-self-end">
+                                <div class="form-check">
+                                    <input th:field="*{Active}" type="checkbox" class="form-check-input">
+                                    <label class="form-check-label">Is Active</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label>Picture Url</label>
+                        <input th:field="*{pictureUrl}" class="form-control" type="url">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </form>
+
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>
